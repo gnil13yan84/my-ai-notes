@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>我的 AI 自學筆記</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#EEF2EF;--ink:#1D2B3A;--muted:#566574;--line:#C9D3CD;--panel:#F8FAF8;--accent:#E8A317;--accent-ink:#1D2B3A;--teal:#2F7F79;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141E1D;--ink:#E6EEEA;--muted:#9DB0AA;--line:#2C3C3A;--panel:#1B2827;--accent:#F0B542;--accent-ink:#141E1D;--teal:#5FB5AC;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#141E1D;--ink:#E6EEEA;--muted:#9DB0AA;--line:#2C3C3A;--panel:#1B2827;--accent:#F0B542;--accent-ink:#141E1D;--teal:#5FB5AC;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.75;font-size:16px}
+.wrap{max-width:980px;margin:0 auto;padding:0 22px}
+a{color:inherit}
+.top{border-bottom:2px solid var(--ink)}
+.top .wrap{display:flex;align-items:center;gap:24px;flex-wrap:wrap;padding-top:14px;padding-bottom:10px}
+.brand{font-family:"Noto Serif TC",serif;font-weight:900;font-size:21px;text-decoration:none}
+nav{display:flex;gap:4px;overflow-x:auto;max-width:100%}
+nav a{padding:4px 12px;text-decoration:none;white-space:nowrap;border-bottom:3px solid transparent;color:var(--muted)}
+nav a.on{color:var(--ink);border-color:var(--accent);font-weight:700}
+nav a:hover{color:var(--ink)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+main{padding:34px 0 10px;min-height:60vh}
+h1{font-family:"Noto Serif TC",serif;font-weight:900;font-size:clamp(30px,6vw,46px);line-height:1.3;margin:0 0 10px}
+h2{font-family:"Noto Serif TC",serif;font-size:24px;margin:40px 0 14px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+h3{margin:0 0 4px;font-size:19px;line-height:1.45}
+.lead{font-size:18px;max-width:34em;margin:0 0 6px}
+.muted{color:var(--muted)}
+.meta{display:flex;gap:10px;align-items:center;font-size:13px;color:var(--muted);margin-bottom:4px}
+.tag{font-size:13px;padding:0 10px;border:1px solid var(--teal);color:var(--teal);border-radius:99px;white-space:nowrap}
+.cover{display:grid;place-items:center;border:2px solid var(--ink);border-radius:12px;aspect-ratio:16/9;font-size:56px;overflow:hidden}
+.cover.big{font-size:96px;max-width:720px}
+.cover.anim span,.cover.anim img.sway{display:inline-block;animation:sway 2.4s ease-in-out infinite}
+@keyframes sway{0%,100%{transform:rotate(-8deg) scale(1)}50%{transform:rotate(8deg) scale(1.18)}}
+@media (prefers-reduced-motion:reduce){.cover.anim span{animation:none}}
+.news{display:grid;grid-template-columns:1.5fr 1fr;gap:26px}
+.stack{display:grid;gap:18px;align-content:start}
+.card{display:block;text-decoration:none;border-top:1px solid var(--line);padding-top:12px}
+.card .cover{margin-bottom:10px}
+.card p{margin:0;color:var(--muted);font-size:15px}
+.card:hover h3{text-decoration:underline}
+.news .lg .cover{font-size:84px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:22px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 22px}
+.chip{font:inherit;padding:3px 14px;border:1px solid var(--ink);border-radius:99px;background:transparent;color:var(--ink);cursor:pointer}
+.chip.on{background:var(--ink);color:var(--bg)}
+.btn{display:inline-block;font:inherit;padding:7px 18px;border-radius:8px;background:var(--accent);color:var(--accent-ink);font-weight:700;text-decoration:none;border:2px solid var(--ink);cursor:pointer}
+.btn.off{background:transparent;color:var(--muted);border:2px dashed var(--line);cursor:default}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 20px}
+.dash{border:2px dashed var(--line);border-radius:12px;padding:22px;color:var(--muted)}
+.fld{margin:0 0 16px}
+.fld label{display:block;font-weight:700;margin-bottom:4px}
+.fld label.ck{font-weight:400}
+.fld input[type=text],.fld textarea,.fld select{width:100%;font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}
+.row{display:grid;grid-template-columns:96px 1fr;gap:16px;padding:14px 0;border-top:1px solid var(--line);text-decoration:none}
+.row time{color:var(--muted);font-size:14px;padding-top:2px}
+.row p{margin:0;color:var(--muted);font-size:15px}
+.row:hover h3{text-decoration:underline}
+.tbl{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:560px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{border-bottom:2px solid var(--ink)}
+.cover img{width:100%;height:100%;object-fit:cover;display:block}
+.stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px}
+.stat b{display:block;font-size:28px;color:var(--ink)}
+.article{max-width:42em}
+.article h2{font-size:20px;border:0;margin:30px 0 8px}
+.article ol,.article ul{padding-left:1.3em;margin:0}
+.bar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:14px 0 6px}
+.crumb{font-size:14px;margin-bottom:14px}
+footer{border-top:1px solid var(--line);margin-top:48px;padding:18px 0 34px;color:var(--muted);font-size:14px}
+@media (max-width:700px){.news{grid-template-columns:1fr}.row{grid-template-columns:1fr;gap:4px}.cover.big{font-size:72px}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" id="brand" href="#home"></a>
+  <nav id="nav" aria-label="主選單"></nav>
+</div></header>
+<div class="wrap"><main id="app"></main><footer id="foot"></footer></div>
+
+<script>
+/* ============ 你只需要改這一區 ============
+   文字放在引號 " " 之間；不要刪掉逗號與括號。
+   改完重新整理就會看到變化。 */
+
+/*DATA-START*/
+const SITE = {
+  name: "我的 AI 自學筆記",
+  tagline: "把學會的東西，一件一件做出來。",
+  intro: "這裡記錄我自學 AI 的歷程：做了什麼作品、用了哪些工具、遇到什麼問題、怎麼解決。",
+  footer: "只分享給朋友看，內容持續更新中。",
+  accent: ""   /* 想換主色就填色碼，例如 "#E85D75" */
+};
+
+/* 資料看板：之後學會自動抓取資料，就把結果放進 items。目前先留空。 */
+const DASH = {
+  title: "資料看板",
+  empty: "這裡預留給自動抓取的資料。之後學會之後，數字會顯示在這裡。",
+  items: [ /* 例如 { label: "今日數值", value: "123" } */ ]
+};
+
+/* 作品：分類(cat)請用「靜態賀卡」「動態賀卡」「APP」其中之一。
+   封面目前用色塊+圖示。有真圖片時，先把圖片上傳到 GitHub 同一個資料夾，
+   再在該作品加一行 image:"檔名.jpg"。動態賀卡可再加 imageAnim:"檔名.gif"。 */
+const WORKS = [
+  { id:"work-1", cat:"靜態賀卡", date:"2026-10-20", emoji:"💌", colors:["#F6D6C8","#F2B8A0"],
+    title:"用 AI 做出第一張賀卡", summary:"從一句想法開始，讓 AI 生成圖案與祝福語，整理成一張完整的賀卡。",
+    prompt:"（在這裡貼上你實際使用的提示詞）",
+    steps:["決定賀卡的對象與場合","請 AI 生成圖案，挑出最滿意的一張","加上祝福語並調整排版","匯出成圖片檔"],
+    notes:["note-2"],
+    takeaway:"（寫下你的心得，例如：提示詞越具體，成品越接近想像。）", link:"" },
+  { id:"work-2", cat:"動態賀卡", date:"2026-10-23", emoji:"🎆", colors:["#C9E3F2","#9FCBE6"], animated:true,
+    title:"把靜態賀卡變成動態賀卡", summary:"用工具讓同一張賀卡動起來，記錄前後差異和操作方式。",
+    prompt:"（貼上你設定動態效果時用的描述或參數）",
+    steps:["準備第一張做好的靜態賀卡","在工具中選擇要動起來的部分","調整動態的快慢與循環","匯出動態賀卡並測試播放"],
+    notes:[],
+    takeaway:"（寫下心得。）", link:"" },
+  { id:"work-3", cat:"APP", date:"2026-10-25", emoji:"📒", colors:["#D7EBC8","#B3D89A"],
+    title:"生活紀錄 APP（測試版）", summary:"我用 AI 協助做出的第一個 APP。打開連結就能試用，資料不會被儲存。",
+    prompt:"（貼上你請 AI 做這個 APP 的主要描述）",
+    steps:["想好 APP 要解決什麼","請 AI 產生第一版","測試並請 AI 修正","整理成可以分享的連結"],
+    notes:[],
+    takeaway:"（寫下心得。）", link:"" }
+];
+
+/* 學習筆記：body 裡每一個字串是一個段落。 */
+const NOTES = [
+  { id:"note-1", cat:"起點", date:"2026-10-18", title:"為什麼開始自學 AI",
+    summary:"畢業很久沒碰資訊相關的東西，這次從做出一個小成品開始重新學。",
+    body:["（這裡寫你的起點與動機。）","（再寫一段你的目標，例如想做出哪些東西。）"] },
+  { id:"note-2", cat:"問題與解法", date:"2026-10-24", title:"第一次卡關：提示詞要寫多具體",
+    summary:"同一個想法，描述方式不同，AI 給的結果差很多。",
+    body:["（這裡寫你遇到的問題。）","（這裡寫你怎麼解決，以及學到什麼。）"] }
+];
+
+/* AI 工具箱：free 填「免費」或「有免費額度」等你實際的狀況。 */
+const TOOLS = [
+  { name:"（工具名稱一）", use:"用來生成賀卡圖案", free:"（免費／有免費額度）", note:"（你的心得）", works:["work-1"] },
+  { name:"（工具名稱二）", use:"讓靜態圖片動起來", free:"（免費／有免費額度）", note:"（你的心得）", works:["work-2"] },
+  { name:"（工具名稱三）", use:"協助做出 APP", free:"（免費／有免費額度）", note:"（你的心得）", works:["work-3"] }
+];
+
+const ABOUT = ["（用幾句話介紹你自己，例如背景、為什麼做這個網站。）","（可以寫你接下來想學什麼。）"];
+/*DATA-END*/
+
+/* ============ 以下是顯示程式，先不用動 ============ */
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const cover = (w, cls) => `<div class="cover ${cls||""}" style="background:linear-gradient(135deg,${w.colors[0]},${w.colors[1]})" role="img" aria-label="${esc(w.title)}封面">${w.image ? `<img class="${w.imageAnim ? "" : "sway"}" src="${esc(w.image)}" alt="">` : `<span>${w.emoji}</span>`}</div>`;
+const wcard = (w, lg) => `<a class="card ${lg?"lg":""}" href="#${w.id}">${cover(w)}<div class="meta"><span class="tag">${esc(w.cat)}</span><time>${esc(w.date)}</time></div><h3>${esc(w.title)}</h3><p>${esc(w.summary)}</p></a>`;
+const ncard = n => `<a class="row" href="#${n.id}"><time>${esc(n.date)}</time><div><span class="tag">${esc(n.cat)}</span><h3>${esc(n.title)}</h3><p>${esc(n.summary)}</p></div></a>`;
+const toolLinks = w => { const t = TOOLS.filter(x => x.works.includes(w.id)); return t.length ? "<ul>" + t.map(x => `<li><a href="#tools">${esc(x.name)}</a>（${esc(x.use)}）</li>`).join("") + "</ul>" : `<p class="muted">尚未填寫。</p>`; };
+const noteLinks = w => { const a = (w.notes || []).map(id => NOTES.find(n => n.id === id)).filter(Boolean); return a.length ? "<ul>" + a.map(n => `<li><a href="#${n.id}">${esc(n.title)}</a></li>`).join("") + "</ul>" : `<p class="muted">還沒有相關筆記。</p>`; };
+
+const MENU = [["home","首頁"],["works","作品"],["notes","學習筆記"],["tools","AI 工具箱"],["about","關於我"]];
+
+function dash() {
+  const body = DASH.items.length
+    ? `<div class="stats">${DASH.items.map(i => `<div class="stat"><b>${esc(i.value)}</b>${esc(i.label)}</div>`).join("")}</div>`
+    : esc(DASH.empty);
+  return `<h2>${esc(DASH.title)}</h2><div class="dash">${body}</div>`;
+}
+
+const PAGES = {
+  home: () => `<h1>${esc(SITE.tagline)}</h1><p class="lead muted">${esc(SITE.intro)}</p>
+    <h2>最新作品</h2>
+    <div class="news"><div>${wcard(WORKS[WORKS.length-1], true)}</div>
+    <div class="stack">${WORKS.slice(0,-1).reverse().map(w => wcard(w)).join("")}</div></div>
+    <h2>學習筆記</h2><div>${NOTES.slice().reverse().map(ncard).join("")}</div>
+    ${dash()}`,
+
+  works: () => {
+    const cats = ["全部", ...new Set(WORKS.map(w => w.cat))];
+    const cur = window.__cat || "全部";
+    const shown = WORKS.filter(w => cur === "全部" || w.cat === cur).reverse();
+    return `<h1>作品</h1><p class="muted">依完成日期排列，最新的在前面。</p>
+      <div class="chips">${cats.map(c => `<button class="chip ${c===cur?"on":""}" data-cat="${esc(c)}">${esc(c)}</button>`).join("")}</div>
+      <div class="grid">${shown.map(w => wcard(w)).join("")}</div>`;
+  },
+
+  notes: () => `<h1>學習筆記</h1><p class="muted">學到什麼、卡在哪裡、怎麼解決。只放文字紀錄，成品請看「作品」。</p>
+    <div>${NOTES.slice().reverse().map(ncard).join("")}</div>`,
+
+  tools: () => `<h1>AI 工具箱</h1><p class="muted">我用過的工具一覽，方便對照查詢。</p>
+    <div class="tbl"><table><thead><tr><th>工具</th><th>用途</th><th>費用</th><th>用在哪些作品</th></tr></thead><tbody>${TOOLS.map(t => `<tr><td><b>${esc(t.name)}</b><br><span class="muted">${esc(t.note)}</span></td><td>${esc(t.use)}</td><td>${esc(t.free)}</td><td>${t.works.map(id => { const w = WORKS.find(x => x.id === id); return w ? `<a href="#${w.id}">${esc(w.title)}</a>` : ""; }).join("<br>")}</td></tr>`).join("")}</tbody></table></div>`,
+
+  editor: () => `<h1>編輯器</h1><div class="article"><ol>
+    <li>上面選分頁，點一個項目就能修改，或按「＋新增」。新增的會排在網站最前面。</li>
+    <li>改完按最下方「產生新的內容」，再按「複製」。</li>
+    <li>到 GitHub 的儲存庫，打開 index.html，點鉛筆圖示，全選後貼上，按 Commit changes。</li>
+    <li>圖片要先上傳到 GitHub 同一個資料夾，再把檔名填進來。</li></ol>
+    <p class="muted">這個頁面只會產生文字，不會直接改動網站，所以朋友打開也不會有影響。</p></div>
+    <div id="ed"><div id="edm"></div><div id="res"></div></div>`,
+
+  about: () => `<h1>關於我</h1><div class="article">${ABOUT.map(p => `<p>${esc(p)}</p>`).join("")}</div>`
+};
+
+function workPage(w) {
+  const stat = w.animated ? `<div class="bar"><button class="btn" id="play">播放動態版本</button><span class="muted" id="hint">目前是靜態版本</span></div>` : "";
+  const link = w.link ? `<p><a class="btn" href="${esc(w.link)}" target="_blank" rel="noopener">${w.cat==="APP"?"開始試用":"看成品"}</a></p>` : "";
+  return `<p class="crumb"><a href="#works">作品</a> / ${esc(w.cat)}</p>
+    <div class="meta"><span class="tag">${esc(w.cat)}</span><time>${esc(w.date)}</time></div>
+    <h1>${esc(w.title)}</h1><p class="lead muted">${esc(w.summary)}</p>
+    ${cover(w, "big")}${stat}${link}
+    <div class="article"><h2>使用的工具</h2>${toolLinks(w)}
+    <h2>提示詞</h2><div class="box">${esc(w.prompt)}</div>
+    <h2>製作過程</h2><ol>${w.steps.map(s => `<li>${esc(s)}</li>`).join("")}</ol>
+    <h2>相關筆記</h2>${noteLinks(w)}
+    <h2>心得</h2><p>${esc(w.takeaway)}</p></div>`;
+}
+function notePage(n) {
+  return `<p class="crumb"><a href="#notes">學習筆記</a></p><div class="meta"><span class="tag">${esc(n.cat)}</span><time>${esc(n.date)}</time></div>
+    <h1>${esc(n.title)}</h1><div class="article">${n.body.map(p => `<p>${esc(p)}</p>`).join("")}</div>`;
+}
+
+function route() {
+  const h = location.hash.slice(1) || "home";
+  let html, title = SITE.name, on = h;
+  const w = WORKS.find(x => x.id === h), n = NOTES.find(x => x.id === h);
+  if (w) { html = workPage(w); title = w.title + " - " + SITE.name; on = "works"; }
+  else if (n) { html = notePage(n); title = n.title + " - " + SITE.name; on = "notes"; }
+  else if (PAGES[h]) { html = PAGES[h](); const m = MENU.find(x => x[0] === h); if (m && h !== "home") title = m[1] + " - " + SITE.name; }
+  else { html = `<h1>找不到這一頁</h1><p><a href="#home">回到首頁</a></p>`; on = ""; }
+  $("#app").innerHTML = html;
+  document.title = title;
+  document.querySelectorAll("nav a").forEach(a => a.classList.toggle("on", a.dataset.k === on));
+  window.scrollTo(0, 0);
+  document.querySelectorAll(".chip").forEach(b => b.onclick = () => { window.__cat = b.dataset.cat; route(); });
+  if (h === "editor") initEditor();
+  const p = $("#play");
+  if (p) p.onclick = () => {
+    const c = $(".cover.big"), a = c.classList.toggle("anim");
+    const im = c.querySelector("img"); if (im && w.imageAnim) im.src = a ? w.imageAnim : w.image;
+    p.textContent = a ? "回到靜態版本" : "播放動態版本";
+    $("#hint").textContent = a ? "目前是動態版本" : "目前是靜態版本";
+  };
+}
+
+/* ===== 編輯器：網址後面加 #editor 才看得到，選單裡不會出現 ===== */
+const MK1 = "/*DATA-" + "START*/", MK2 = "/*DATA-" + "END*/";
+const SCHEMA = {
+  works: [["cat","分類","select",["靜態賀卡","動態賀卡","APP"]],["date","日期","text"],["title","標題","text"],["summary","一句話簡介","area"],["emoji","沒有圖片時顯示的圖示","text"],["colors","封面色塊（兩個顏色）","colors"],["image","封面圖片檔名（選填，例如 card1.jpg）","text"],["imageAnim","動態版檔名（選填，動態賀卡用，例如 card1.gif）","text"],["prompt","提示詞","area"],["steps","製作過程（一行一個步驟）","lines"],["takeaway","心得","area"],["link","成品或試用連結（選填）","text"],["notes","相關筆記","check","notes"]],
+  notes: [["cat","分類","select",["起點","問題與解法","概念","心得"]],["date","日期","text"],["title","標題","text"],["summary","摘要","area"],["body","內文（段落之間空一行）","paras"]],
+  tools: [["name","工具名稱","text"],["use","用途","text"],["free","費用狀況","text"],["note","你的心得","area"],["works","用在哪些作品","check","works"]]
+};
+const SF = [["name","網站名稱","text"],["tagline","首頁大標語","text"],["intro","首頁介紹","area"],["footer","頁尾文字","text"],["accent","主色（選填，例如 #E85D75）","text"]];
+const LAB = { works: "作品", notes: "學習筆記", tools: "AI 工具", site: "網站資訊" };
+
+function initEditor() {
+  const cp = x => JSON.parse(JSON.stringify(x)), J = x => JSON.stringify(x, null, 2);
+  const D = { works: cp(WORKS), notes: cp(NOTES), tools: cp(TOOLS) }, S = cp(SITE), A = { t: ABOUT.slice() };
+  const nid = (L, p) => p + (Math.max(0, ...L.map(x => +String(x.id).split("-")[1] || 0)) + 1);
+  const today = () => new Date().toISOString().slice(0, 10);
+  const BLANK = {
+    works: () => ({ id: nid(D.works, "work-"), cat: "靜態賀卡", date: today(), emoji: "✨", colors: ["#E3EAF0", "#C9D6E0"], title: "新作品", summary: "", prompt: "", steps: [], takeaway: "", link: "", notes: [] }),
+    notes: () => ({ id: nid(D.notes, "note-"), cat: "心得", date: today(), title: "新筆記", summary: "", body: [] }),
+    tools: () => ({ name: "新工具", use: "", free: "", note: "", works: [] })
+  };
+  let tab = "works", sel = 0;
+  const root = $("#ed");
+
+  const val = (o, k, t) => t === "lines" ? (o[k] || []).join("\n") : t === "paras" ? (o[k] || []).join("\n\n") : (o[k] || "");
+  function field(f, o, a) {
+    const k = f[0], t = f[2], x = f[3], at = `data-k="${k}" data-t="${t}"${a ? ' data-a="1"' : ""}`;
+    let c;
+    if (t === "area" || t === "lines" || t === "paras") c = `<textarea ${at} rows="${t === "area" ? 3 : 6}">${esc(val(o, k, t))}</textarea>`;
+    else if (t === "select") c = `<select ${at}>${x.map(s => `<option ${s === o[k] ? "selected" : ""}>${esc(s)}</option>`).join("")}</select>`;
+    else if (t === "colors") c = (o.colors || ["#cccccc", "#999999"]).map((v, n) => `<input type="color" data-k="colors" data-t="color" data-n="${n}" value="${esc(v)}">`).join(" ");
+    else if (t === "check") c = D[x].map(y => `<label class="ck"><input type="checkbox" ${at} value="${esc(y.id)}" ${(o[k] || []).includes(y.id) ? "checked" : ""}> ${esc(y.title || y.name)}</label>`).join("") || `<span class="muted">還沒有項目</span>`;
+    else c = `<input type="text" ${at} value="${esc(o[k] || "")}">`;
+    return `<div class="fld"><label>${f[1]}</label>${c}</div>`;
+  }
+
+  function draw() {
+    const L = D[tab], it = L && L[sel];
+    let main;
+    if (tab === "site") main = SF.map(f => field(f, S)).join("") + field(["t", "「關於我」內容（段落之間空一行）", "paras"], A, 1);
+    else main = `<div class="chips">${L.map((x, i) => `<button class="chip ${i === sel ? "on" : ""}" data-act="sel" data-i="${i}">${esc(x.title || x.name || "未命名")}</button>`).join("")}<button class="chip" data-act="add">＋新增</button></div>`
+      + (it ? SCHEMA[tab].map(f => field(f, it)).join("") + `<button class="btn off" data-act="del" data-i="${sel}">刪除這一筆</button>` : `<p class="muted">目前沒有項目，按「＋新增」。</p>`);
+    $("#edm").innerHTML = `<div class="chips">${Object.keys(LAB).map(k => `<button class="chip ${k === tab ? "on" : ""}" data-act="tab" data-v="${k}">${LAB[k]}</button>`).join("")}</div><div class="box">${main}</div><p><button class="btn" data-act="gen">產生新的內容</button></p>`;
+  }
+
+  async function gen() {
+    const data = "/* 網站資訊 */\nconst SITE = " + J(S) + ";\n\n/* 資料看板（先不用動） */\nconst DASH = " + J(DASH) + ";\n\n/* 作品 */\nconst WORKS = " + J(D.works) + ";\n\n/* 學習筆記 */\nconst NOTES = " + J(D.notes) + ";\n\n/* AI 工具箱 */\nconst TOOLS = " + J(D.tools) + ";\n\n/* 關於我 */\nconst ABOUT = " + J(A.t) + ";\n";
+    let res = data, note = "目前這個環境讀不到原始檔，所以只產生「資料區」。放到 GitHub 之後，這裡會產生整份 index.html。";
+    try {
+      const r = await fetch(location.href.split("#")[0]), src = await r.text(), a = src.indexOf(MK1), b = src.indexOf(MK2);
+      if (r.ok && a >= 0 && b > a) { res = src.slice(0, a + MK1.length) + "\n" + data + src.slice(b); note = "已產生整份新的 index.html，請按「複製」。"; }
+    } catch (e) {}
+    $("#res").innerHTML = `<h2>結果</h2><p>${note}</p><textarea id="outta" readonly rows="8" style="width:100%;font:13px monospace">${esc(res)}</textarea><p><button class="btn" id="cp">複製</button> <span id="cpm" class="muted"></span></p>`;
+    $("#cp").onclick = async () => {
+      const ta = $("#outta");
+      try { await navigator.clipboard.writeText(ta.value); $("#cpm").textContent = "已複製"; }
+      catch (e) { ta.select(); $("#cpm").textContent = "請按 Ctrl+C（手機請長按複製）"; }
+    };
+    $("#res").scrollIntoView();
+  }
+
+  root.onclick = e => {
+    const b = e.target.closest("[data-act]"); if (!b) return;
+    const a = b.dataset.act, i = +b.dataset.i, L = D[tab];
+    if (a === "tab") { tab = b.dataset.v; sel = 0; }
+    else if (a === "sel") sel = i;
+    else if (a === "add") { L.push(BLANK[tab]()); sel = L.length - 1; }
+    else if (a === "del") { if (confirm("確定要刪除這一筆嗎？")) { L.splice(i, 1); sel = 0; } }
+    else if (a === "gen") { gen(); return; }
+    draw();
+  };
+  root.oninput = root.onchange = e => {
+    const el = e.target, k = el.dataset.k; if (!k) return;
+    const o = el.dataset.a ? A : tab === "site" ? S : D[tab][sel], t = el.dataset.t, v = el.value;
+    if (t === "lines") o[k] = v.split("\n").map(s => s.trim()).filter(Boolean);
+    else if (t === "paras") o[k] = v.split(/\n\s*\n/).map(s => s.trim()).filter(Boolean);
+    else if (t === "color") (o.colors = o.colors || ["#cccccc", "#999999"])[+el.dataset.n] = v;
+    else if (t === "check") { const arr = o[k] || (o[k] = []), i = arr.indexOf(v); if (el.checked && i < 0) arr.push(v); if (!el.checked && i >= 0) arr.splice(i, 1); }
+    else o[k] = v;
+  };
+  draw();
+}
+
+$("#brand").textContent = SITE.name;
+$("#foot").textContent = SITE.footer;
+$("#nav").innerHTML = MENU.map(m => `<a href="#${m[0]}" data-k="${m[0]}">${m[1]}</a>`).join("");
+if (SITE.accent) document.documentElement.style.setProperty("--accent", SITE.accent);
+window.addEventListener("hashchange", route);
+route();
+</script>
+</body>
+</html>
